@@ -8,8 +8,20 @@
 
 #include <iostream>
 
+extern "C" {
+#include "reverse_string.h"
+}
+
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    char * ss[5] = {
+        "Hello, World!",
+        "a",
+        "abc",
+        "abcd",
+        "Hello, World!"};
+    for (int i = 0; i < 5; i++) {
+        std::cout << reverse_string(ss[i]) << '\n';
+    }
     return 0;
 }
