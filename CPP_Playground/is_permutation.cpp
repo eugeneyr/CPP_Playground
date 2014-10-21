@@ -13,6 +13,7 @@
 #include <cstring>
 
 extern void build_freq_map(const char * str, std::map<char, int>& freqMap);
+extern int count_chars (char c, const char * str);
 
 bool is_permutation(const char * s1, const char * s2) {
     if (!s1) {
@@ -47,3 +48,34 @@ void build_freq_map(const char * str, std::map<char, int>& freqMap) {
     }
 }
 
+// the version that does not use any additional data structures
+bool is_permutation_in_place(const char * s1, const char * s2) {
+    if (!s1) {
+        return !s2;
+    }
+    if (!s2) {
+        return !s1;
+    }
+    if (strlen(s1) != strlen(s2)) {
+        return false;
+    }
+    for (const char * p = s1; *p; p++) {
+        if (count_chars(*p, s1) != count_chars(*p, s2)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int count_chars (char c, const char * str) {
+    if (!str) {
+        return 0;
+    }
+    int counter = 0;
+    for (const char * p = str; *p; p++) {
+        if (*p == c) {
+            counter++;
+        }
+    }
+    return counter;
+}
