@@ -12,6 +12,7 @@
 		4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E09D19F5866E003DA3CB /* escape_space_chars.cpp */; };
 		4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A019F6BB73003DA3CB /* chars_all_unique.cpp */; };
 		4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */; };
+		4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,9 @@
 		4473E0A119F6BB73003DA3CB /* chars_all_unique.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chars_all_unique.h; sourceTree = "<group>"; };
 		4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = is_permutation.cpp; sourceTree = "<group>"; };
 		4473E0A419F6C5B7003DA3CB /* is_permutation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = is_permutation.h; sourceTree = "<group>"; };
+		4473E0A619F6E92B003DA3CB /* chapter1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chapter1.h; sourceTree = "<group>"; };
+		4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = is_rotation.cpp; sourceTree = "<group>"; };
+		4473E0A819F6E9B2003DA3CB /* is_rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = is_rotation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,9 @@
 				4473E0A119F6BB73003DA3CB /* chars_all_unique.h */,
 				4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */,
 				4473E0A419F6C5B7003DA3CB /* is_permutation.h */,
+				4473E0A619F6E92B003DA3CB /* chapter1.h */,
+				4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */,
+				4473E0A819F6E9B2003DA3CB /* is_rotation.h */,
 			);
 			path = CPP_Playground;
 			sourceTree = "<group>";
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */,
+				4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */,
 				4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */,
 				4473E09419EDA9EE003DA3CB /* main.cpp in Sources */,
 				4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */,
