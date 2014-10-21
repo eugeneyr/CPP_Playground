@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		4473E09419EDA9EE003DA3CB /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E09319EDA9EE003DA3CB /* main.cpp */; };
 		4473E09C19EDAC8E003DA3CB /* reverse_string.c in Sources */ = {isa = PBXBuildFile; fileRef = 4473E09A19EDAC8E003DA3CB /* reverse_string.c */; };
+		4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E09D19F5866E003DA3CB /* escape_space_chars.cpp */; };
+		4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A019F6BB73003DA3CB /* chars_all_unique.cpp */; };
+		4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +31,12 @@
 		4473E09319EDA9EE003DA3CB /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		4473E09A19EDAC8E003DA3CB /* reverse_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = reverse_string.c; sourceTree = "<group>"; };
 		4473E09B19EDAC8E003DA3CB /* reverse_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reverse_string.h; sourceTree = "<group>"; };
+		4473E09D19F5866E003DA3CB /* escape_space_chars.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = escape_space_chars.cpp; sourceTree = "<group>"; };
+		4473E09E19F5866E003DA3CB /* escape_space_chars.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = escape_space_chars.h; sourceTree = "<group>"; };
+		4473E0A019F6BB73003DA3CB /* chars_all_unique.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chars_all_unique.cpp; sourceTree = "<group>"; };
+		4473E0A119F6BB73003DA3CB /* chars_all_unique.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chars_all_unique.h; sourceTree = "<group>"; };
+		4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = is_permutation.cpp; sourceTree = "<group>"; };
+		4473E0A419F6C5B7003DA3CB /* is_permutation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = is_permutation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +72,12 @@
 				4473E09319EDA9EE003DA3CB /* main.cpp */,
 				4473E09A19EDAC8E003DA3CB /* reverse_string.c */,
 				4473E09B19EDAC8E003DA3CB /* reverse_string.h */,
+				4473E09D19F5866E003DA3CB /* escape_space_chars.cpp */,
+				4473E09E19F5866E003DA3CB /* escape_space_chars.h */,
+				4473E0A019F6BB73003DA3CB /* chars_all_unique.cpp */,
+				4473E0A119F6BB73003DA3CB /* chars_all_unique.h */,
+				4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */,
+				4473E0A419F6C5B7003DA3CB /* is_permutation.h */,
 			);
 			path = CPP_Playground;
 			sourceTree = "<group>";
@@ -123,7 +138,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */,
+				4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */,
 				4473E09419EDA9EE003DA3CB /* main.cpp in Sources */,
+				4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */,
 				4473E09C19EDAC8E003DA3CB /* reverse_string.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,7 +153,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -149,6 +167,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -175,7 +194,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -190,6 +209,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

@@ -15,7 +15,7 @@ char * reverse_string(char * s) {
     }
     char * head = s;
     char * tail = s;
-    while (tail) {
+    while (*tail) {
         tail++;
     }
     tail--;
