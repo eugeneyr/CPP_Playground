@@ -8,9 +8,9 @@
 
 #include <iostream>
 
-extern "C" {
+//extern "C" {
 #include "reverse_string.h"
-}
+//}
 
 #include <utility>
 
@@ -59,19 +59,18 @@ int main(int argc, const char * argv[]) {
     //
     //        std::cout << "are " << nonAnagrams.first << " and " << nonAnagrams.second << " anagrams? " << is_permutation_in_place(nonAnagrams.first, nonAnagrams.second) << '\n';
     //    }
-    //    {    std::pair<const char *, const char *> rotations = {"abc", "cab"};
-    //        std::pair<const char *, const char *> nonRotations = {"abdadad", "dadadba"};
-    //
-    //        std::cout << "is " << rotations.first << " a rotation of " << rotations.second << "? " << is_rotation(rotations.first, rotations.second) << '\n';
-    //
-    //        std::cout << "is " << nonRotations.first << " a rotation of " << nonRotations.second << "? " << is_rotation(nonRotations.first, nonRotations.second) << '\n';
-    //
-    //    }
-        {
-            char s[20] = "aaabbcddddde";
-            std::pair<CompressionResult, char *> compRes = compress_string(s);
-            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+        {    std::pair<const char *, const char *> rotations = {"abc", "cab"};
+            std::pair<const char *, const char *> nonRotations = {"abdadad", "dadadba"};
+    
+            std::cout << "is " << rotations.first << " a rotation of " << rotations.second << "? " << is_rotation(rotations.first, rotations.second) << '\n';
+    
+            std::cout << "is " << nonRotations.first << " a rotation of " << nonRotations.second << "? " << is_rotation(nonRotations.first, nonRotations.second) << '\n';
         }
+//        {
+//            char s[20] = "aaabbcddddde";
+//            std::pair<CompressionResult, char *> compRes = compress_string(s);
+//            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+//        }
 //        {
 //            char s[20] = "a";
 //            std::pair<CompressionResult, char *> compRes = compress_string(s);
@@ -82,11 +81,11 @@ int main(int argc, const char * argv[]) {
 //            std::pair<CompressionResult, char *> compRes = compress_string(s);
 //            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
 //        }
-//        {
-//            char s[20] = "aa";
-//            std::pair<CompressionResult, char *> compRes = compress_string(s);
-//            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-//        }
+        {
+            char s[20] = "aaa";
+            std::pair<CompressionResult, char *> compRes = compress_string(s);
+            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+        }
     
     {
         SquareMatrix m(6);

@@ -17,7 +17,7 @@ std::pair<CompressionResult, char *> compress_string(char * str) {
         return result;
     }
     size_t len = strlen(str);
-    char * buffer = new char[len + 2];
+    char * buffer = new char[len * 10];
     if (!buffer) {
         // memory allocation error
         result.first = ERR_MEMALLOC;

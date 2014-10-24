@@ -1,5 +1,6 @@
 #include "escape_space_chars.h"
 #include <string>
+#include <cstring>
 
 char * escape_space_chars(char * string, size_t capacity) {
     if (!string) {
