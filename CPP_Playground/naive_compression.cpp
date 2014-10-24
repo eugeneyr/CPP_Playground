@@ -17,7 +17,7 @@ std::pair<CompressionResult, char *> compress_string(char * str) {
         return result;
     }
     size_t len = strlen(str);
-    char * buffer = new char[len + 1];
+    char * buffer = new char[len + 2];
     if (!buffer) {
         // memory allocation error
         result.first = ERR_MEMALLOC;
@@ -38,7 +38,7 @@ std::pair<CompressionResult, char *> compress_string(char * str) {
             char tmpBuff[32];
             sprintf(tmpBuff, "%zu", counter);
             size_t increment = 1 + strlen(tmpBuff);
-            if (bytesCopied + increment > len) {
+            if (bytesCopied + increment >= len) {
                 result.first = ERR_NOSPACESAVED;
                 delete [] buffer;
                 return result;
