@@ -68,5 +68,69 @@ int main(int argc, const char * argv[]) {
         std::cout << "is " << nonRotations.first << " a rotation of " << nonRotations.second << "? " << is_rotation(nonRotations.first, nonRotations.second) << '\n';
         
     }
+    {
+        char s[20] = "aaabbcddddde";
+        std::pair<CompressionResult, char *> compRes = compress_string(s);
+        std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+    }
+    {
+        char s[20] = "a";
+        std::pair<CompressionResult, char *> compRes = compress_string(s);
+        std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+    }
+    {
+        char s[20] = "abcd";
+        std::pair<CompressionResult, char *> compRes = compress_string(s);
+        std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+    }
+    {
+        char s[20] = "aa";
+        std::pair<CompressionResult, char *> compRes = compress_string(s);
+        std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+    }
+
+    {
+        SquareMatrix m(6);
+        for (int x = 0; x < m.getSize(); x++) {
+            for (int y = 0; y < m.getSize(); y++) {
+                m.setCell(x, y, 0);
+            }
+        }
+        m.setCell(2, 1, 1);
+        m.setCell(3, 1, 1);
+        m.setCell(1, 3, 1);
+        m.setCell(4, 3, 1);
+        m.setCell(2, 4, 1);
+        m.setCell(3, 4, 1);
+        std::cout << '\n';
+        m.print();
+        m.rotate_90_degrees();
+        std::cout << '\n';
+        m.print();
+        m.rotate_90_degrees();
+        std::cout << '\n';
+        m.print();
+        m.rotate_90_degrees();
+        std::cout << '\n';
+        m.print();
+        m.rotate_90_degrees();
+        std::cout << '\n';
+        m.print();
+    }
+    
+    {
+        Matrix m(5, 4);
+        for (int i = 0; i < m.getSizeX(); i++) {
+            for (int j = 0; j < m.getSizeY(); j++) {
+                m.setCell(i, j, 1 + i * j);
+            }
+        }
+        m.print();
+        m.setCell(1, 0, 0.0);
+        m.setCell(3, 2, 0.0);
+        m.zeroify();
+        m.print();
+    }
+    
     return 0;
 }

@@ -14,5 +14,8 @@
 #include "chars_all_unique.h"
 #include "is_permutation.h"
 #include "is_rotation.h"
+#include "naive_compression.h"
+#include "rotate_image.h"
+#include "zeroify_matrix.h"
 
 #endif
