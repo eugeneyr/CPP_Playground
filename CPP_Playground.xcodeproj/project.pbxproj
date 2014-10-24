@@ -13,6 +13,9 @@
 		4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A019F6BB73003DA3CB /* chars_all_unique.cpp */; };
 		4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A319F6C5B7003DA3CB /* is_permutation.cpp */; };
 		4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */; };
+		4499BE8C19F95190007C04BA /* rotate_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4499BE8A19F95190007C04BA /* rotate_image.cpp */; };
+		4499BE8F19F9CEEB007C04BA /* zeroify_matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4499BE8D19F9CEEB007C04BA /* zeroify_matrix.cpp */; };
+		44A4406519F735E200EF6D3C /* naive_compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44A4406319F735E200EF6D3C /* naive_compression.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +44,12 @@
 		4473E0A619F6E92B003DA3CB /* chapter1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chapter1.h; sourceTree = "<group>"; };
 		4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = is_rotation.cpp; sourceTree = "<group>"; };
 		4473E0A819F6E9B2003DA3CB /* is_rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = is_rotation.h; sourceTree = "<group>"; };
+		4499BE8A19F95190007C04BA /* rotate_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rotate_image.cpp; sourceTree = "<group>"; };
+		4499BE8B19F95190007C04BA /* rotate_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rotate_image.h; sourceTree = "<group>"; };
+		4499BE8D19F9CEEB007C04BA /* zeroify_matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = zeroify_matrix.cpp; sourceTree = "<group>"; };
+		4499BE8E19F9CEEB007C04BA /* zeroify_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zeroify_matrix.h; sourceTree = "<group>"; };
+		44A4406319F735E200EF6D3C /* naive_compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = naive_compression.cpp; sourceTree = "<group>"; };
+		44A4406419F735E200EF6D3C /* naive_compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = naive_compression.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +94,12 @@
 				4473E0A619F6E92B003DA3CB /* chapter1.h */,
 				4473E0A719F6E9B2003DA3CB /* is_rotation.cpp */,
 				4473E0A819F6E9B2003DA3CB /* is_rotation.h */,
+				44A4406319F735E200EF6D3C /* naive_compression.cpp */,
+				44A4406419F735E200EF6D3C /* naive_compression.h */,
+				4499BE8A19F95190007C04BA /* rotate_image.cpp */,
+				4499BE8B19F95190007C04BA /* rotate_image.h */,
+				4499BE8D19F9CEEB007C04BA /* zeroify_matrix.cpp */,
+				4499BE8E19F9CEEB007C04BA /* zeroify_matrix.h */,
 			);
 			path = CPP_Playground;
 			sourceTree = "<group>";
@@ -147,10 +162,13 @@
 			files = (
 				4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */,
 				4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */,
+				4499BE8C19F95190007C04BA /* rotate_image.cpp in Sources */,
 				4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */,
 				4473E09419EDA9EE003DA3CB /* main.cpp in Sources */,
+				4499BE8F19F9CEEB007C04BA /* zeroify_matrix.cpp in Sources */,
 				4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */,
 				4473E09C19EDAC8E003DA3CB /* reverse_string.c in Sources */,
+				44A4406519F735E200EF6D3C /* naive_compression.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +182,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -177,7 +195,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -205,7 +223,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
@@ -220,7 +238,7 @@
 				DEPLOYMENT_LOCATION = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -266,6 +284,7 @@
 				4473E09919EDA9EE003DA3CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
