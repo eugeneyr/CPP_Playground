@@ -89,34 +89,34 @@ int main(int argc, const char * argv[]) {
         std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
     }
 
-    {
-        SquareMatrix m(6);
-        for (int x = 0; x < m.getSize(); x++) {
-            for (int y = 0; y < m.getSize(); y++) {
-                m.setCell(x, y, 0);
-            }
-        }
-        m.setCell(2, 1, 1);
-        m.setCell(3, 1, 1);
-        m.setCell(1, 3, 1);
-        m.setCell(4, 3, 1);
-        m.setCell(2, 4, 1);
-        m.setCell(3, 4, 1);
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-    }
+//    {
+//        SquareMatrix m(6);
+//        for (int x = 0; x < m.getSize(); x++) {
+//            for (int y = 0; y < m.getSize(); y++) {
+//                m.setCell(x, y, 0);
+//            }
+//        }
+//        m.setCell(2, 1, 1);
+//        m.setCell(3, 1, 1);
+//        m.setCell(1, 3, 1);
+//        m.setCell(4, 3, 1);
+//        m.setCell(2, 4, 1);
+//        m.setCell(3, 4, 1);
+//        std::cout << '\n';
+//        m.print();
+//        m.rotate_90_degrees();
+//        std::cout << '\n';
+//        m.print();
+//        m.rotate_90_degrees();
+//        std::cout << '\n';
+//        m.print();
+//        m.rotate_90_degrees();
+//        std::cout << '\n';
+//        m.print();
+//        m.rotate_90_degrees();
+//        std::cout << '\n';
+//        m.print();
+//    }
     
     {
         Matrix m(5, 4);
@@ -129,6 +129,7 @@ int main(int argc, const char * argv[]) {
         m.setCell(1, 0, 0.0);
         m.setCell(3, 2, 0.0);
         m.zeroify();
+        std::cout << std::endl;
         m.print();
     }
     

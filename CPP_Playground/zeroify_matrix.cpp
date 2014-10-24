@@ -12,7 +12,7 @@
 
 Matrix::Matrix(unsigned int aSizeX, unsigned int aSizeY) : sizeX(aSizeX), sizeY(aSizeY) {
     data = new double*[sizeX];
-    for (unsigned int i = 0; i < sizeY; i++) {
+    for (unsigned int i = 0; i < sizeX; i++) {
         data[i] = new double[sizeY];
     }
 }
