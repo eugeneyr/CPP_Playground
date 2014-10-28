@@ -66,11 +66,11 @@ int main(int argc, const char * argv[]) {
     
             std::cout << "is " << nonRotations.first << " a rotation of " << nonRotations.second << "? " << is_rotation(nonRotations.first, nonRotations.second) << '\n';
         }
-//        {
-//            char s[20] = "aaabbcddddde";
-//            std::pair<CompressionResult, char *> compRes = compress_string(s);
-//            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-//        }
+        {
+            char s[20] = "aaabbcddddde";
+            std::pair<CompressionResult, char *> compRes = compress_string(s);
+            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
+        }
 //        {
 //            char s[20] = "a";
 //            std::pair<CompressionResult, char *> compRes = compress_string(s);
