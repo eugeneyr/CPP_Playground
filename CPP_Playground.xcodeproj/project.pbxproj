@@ -16,6 +16,9 @@
 		4499BE8C19F95190007C04BA /* rotate_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4499BE8A19F95190007C04BA /* rotate_image.cpp */; };
 		4499BE8F19F9CEEB007C04BA /* zeroify_matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4499BE8D19F9CEEB007C04BA /* zeroify_matrix.cpp */; };
 		44A4406519F735E200EF6D3C /* naive_compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44A4406319F735E200EF6D3C /* naive_compression.cpp */; };
+		44BBD90E1A01A81B006D0CF6 /* chapter1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */; };
+		44BBD9111A01A8B4006D0CF6 /* chapter2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */; };
+		44BE3EE519FDDDF30026F488 /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BE3EE319FDDDF30026F488 /* list.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +53,11 @@
 		4499BE8E19F9CEEB007C04BA /* zeroify_matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zeroify_matrix.h; sourceTree = "<group>"; };
 		44A4406319F735E200EF6D3C /* naive_compression.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = naive_compression.cpp; sourceTree = "<group>"; };
 		44A4406419F735E200EF6D3C /* naive_compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = naive_compression.h; sourceTree = "<group>"; };
+		44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chapter1.cpp; sourceTree = "<group>"; };
+		44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chapter2.cpp; sourceTree = "<group>"; };
+		44BBD9101A01A8B4006D0CF6 /* chapter2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chapter2.h; sourceTree = "<group>"; };
+		44BE3EE319FDDDF30026F488 /* list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
+		44BE3EE419FDDDF30026F488 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +90,8 @@
 		4473E09219EDA9EE003DA3CB /* CPP_Playground */ = {
 			isa = PBXGroup;
 			children = (
+				44BE3EE319FDDDF30026F488 /* list.cpp */,
+				44BE3EE419FDDDF30026F488 /* list.h */,
 				4473E09319EDA9EE003DA3CB /* main.cpp */,
 				4473E09A19EDAC8E003DA3CB /* reverse_string.c */,
 				4473E09B19EDAC8E003DA3CB /* reverse_string.h */,
@@ -100,6 +110,9 @@
 				4499BE8B19F95190007C04BA /* rotate_image.h */,
 				4499BE8D19F9CEEB007C04BA /* zeroify_matrix.cpp */,
 				4499BE8E19F9CEEB007C04BA /* zeroify_matrix.h */,
+				44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */,
+				44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */,
+				44BBD9101A01A8B4006D0CF6 /* chapter2.h */,
 			);
 			path = CPP_Playground;
 			sourceTree = "<group>";
@@ -163,11 +176,14 @@
 				4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */,
 				4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */,
 				4499BE8C19F95190007C04BA /* rotate_image.cpp in Sources */,
+				44BBD90E1A01A81B006D0CF6 /* chapter1.cpp in Sources */,
+				44BE3EE519FDDDF30026F488 /* list.cpp in Sources */,
 				4473E09F19F5866E003DA3CB /* escape_space_chars.cpp in Sources */,
 				4473E09419EDA9EE003DA3CB /* main.cpp in Sources */,
 				4499BE8F19F9CEEB007C04BA /* zeroify_matrix.cpp in Sources */,
 				4473E0A519F6C5B7003DA3CB /* is_permutation.cpp in Sources */,
 				4473E09C19EDAC8E003DA3CB /* reverse_string.c in Sources */,
+				44BBD9111A01A8B4006D0CF6 /* chapter2.cpp in Sources */,
 				44A4406519F735E200EF6D3C /* naive_compression.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
