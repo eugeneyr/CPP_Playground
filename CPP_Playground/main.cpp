@@ -7,129 +7,186 @@
 //
 
 #include <iostream>
-
-//extern "C" {
-#include "reverse_string.h"
-//}
-
+#include <exception>
 #include <utility>
 
-#include "chapter1.h"
+#include "list.h"
+//#include "list.cpp"
+#include "chapter2.h"
+#include "chapter2.cpp"
 
-static char ss[6][32] = {
-    "Hello, World!",
-    "a ",
-    "ab c",
-    " a b c d ",
-    " "
-};
-
-static char uniqueness[4][20] = {
-    "",
-    "a",
-    "abc",
-    "abba"
-};
-
+//template class LinkedListNode<int>;
+//extern template LinkedListNode<int> * create_list(const std::vector<int>& elements);
+//extern template void enumerate(LinkedListNode<int> * head, const std::function<void(int)> lambda);
+//extern template LinkedListNode<int> * remove_duplicates_no_stl(LinkedListNode<int> * head);
+//extern template LinkedListNode<int> * remove_duplicates(LinkedListNode<int> * head);
 
 int main(int argc, const char * argv[]) {
-    std::cout << "sizeof ss: " << sizeof(ss) << '\n';
-    std::cout << "sizeof uniqueness: " << sizeof(uniqueness) << '\n';
-//    for (auto s : ss) {
-//        std::cout << reverse_string(s) << '\n';
-//    }
-//    
-//    for (auto s : ss) {
-//        std::cout << escape_space_chars(s, 20) << '\n';
-//    }
-//    
-//    for (int i = 0; i < 4; i++) {
-//        std::cout << uniqueness[i] << (is_all_unique(uniqueness[i]) ? ": all unique\n" : ": not unique\n");
-//    }
-    
-    //    {
-    //        std::pair<const char *, const char *> anagrams = {"banana", "anaban"};
-    //        std::pair<const char *, const char *> nonAnagrams = {"banana", "aanaba"};
-    //
-    //        std::cout << "are " << anagrams.first << " and " << anagrams.second << " anagrams? " << is_permutation(anagrams.first, anagrams.second) << '\n';
-    //
-    //        std::cout << "are " << nonAnagrams.first << " and " << nonAnagrams.second << " anagrams? " << is_permutation(nonAnagrams.first, nonAnagrams.second) << '\n';
-    //
-    //        std::cout << "are " << anagrams.first << " and " << anagrams.second << " anagrams? " << is_permutation_in_place(anagrams.first, anagrams.second) << '\n';
-    //
-    //        std::cout << "are " << nonAnagrams.first << " and " << nonAnagrams.second << " anagrams? " << is_permutation_in_place(nonAnagrams.first, nonAnagrams.second) << '\n';
-    //    }
-        {    std::pair<const char *, const char *> rotations = {"abc", "cab"};
-            std::pair<const char *, const char *> nonRotations = {"abdadad", "dadadba"};
-    
-            std::cout << "is " << rotations.first << " a rotation of " << rotations.second << "? " << is_rotation(rotations.first, rotations.second) << '\n';
-    
-            std::cout << "is " << nonRotations.first << " a rotation of " << nonRotations.second << "? " << is_rotation(nonRotations.first, nonRotations.second) << '\n';
-        }
-        {
-            char s[20] = "aaabbcddddde";
-            std::pair<CompressionResult, char *> compRes = compress_string(s);
-            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-        }
-//        {
-//            char s[20] = "a";
-//            std::pair<CompressionResult, char *> compRes = compress_string(s);
-//            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-//        }
-//        {
-//            char s[20] = "abcd";
-//            std::pair<CompressionResult, char *> compRes = compress_string(s);
-//            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-//        }
-        {
-            char s[20] = "aaa";
-            std::pair<CompressionResult, char *> compRes = compress_string(s);
-            std::cout << "Err code: " << compRes.first << '\n' << "Compression result: " << compRes.second << '\n';
-        }
-    
+    auto listPrinter = [] (int x) {std::cout << x << std::endl;};
+    // 2.1
     {
-        SquareMatrix m(6);
-        for (int x = 0; x < m.getSize(); x++) {
-            for (int y = 0; y < m.getSize(); y++) {
-                m.setCell(x, y, 0);
-            }
+        std::vector<int> v({1, 2, 3, 1, 2, 3, 1});
+        std::cout << "Problem 2.1, without sets:\n";
+        LinkedListNode<int> * head = create_list<int>(v);
+        std::cout << "Before: \n";
+        enumerate<int>(head, listPrinter);
+        head = remove_duplicates_no_stl<int>(head);
+        std::cout << "After: \n";
+        enumerate<int>(head, listPrinter);
+        std::cout << "Problem 2.1, with sets:\n";
+        head = create_list<int>(v);
+        std::cout << "Before: \n";
+        enumerate<int>(head, listPrinter);
+        head = remove_duplicates<int>(head);
+        std::cout << "After: \n";
+        enumerate<int>(head, listPrinter);
+    }
+    // 2.2
+    {
+        std::vector<int> v({5, 4, 3, 2, 1, 0});
+        LinkedListNode<int> * head = create_list<int>(v);
+        auto node = find_kth_from_the_end<int>(head, 0);
+        std::cout << "0th from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 1);
+        std::cout << "1st from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 2);
+        std::cout << "2nd from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 3);
+        std::cout << "3rd from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 5);
+        std::cout << "5th from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 6);
+        std::cout << "6th from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+        node = find_kth_from_the_end<int>(head, 7);
+        std::cout << "7th from the end: " << (node != nullptr ? node->getData() : -1) << std::endl;
+    }
+    // 2.3
+    {
+        std::cout << "Deleting node with val = 3:\n";
+        std::vector<int> v({0, 1, 2, 3, 4, 5, 6});
+        LinkedListNode<int> * head = create_list<int>(v);
+        auto node = head;
+        while (node->getData() < 3) {
+            node = node->getNext();
         }
-        m.setCell(2, 1, 1);
-        m.setCell(3, 1, 1);
-        m.setCell(1, 3, 1);
-        m.setCell(4, 3, 1);
-        m.setCell(2, 4, 1);
-        m.setCell(3, 4, 1);
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
-        m.rotate_90_degrees();
-        std::cout << '\n';
-        m.print();
+        node = delete_in_the_middle(node);
+        enumerate<int>(head, listPrinter);
     }
     
+    // 2.4
     {
-        Matrix m(5, 4);
-        for (int i = 0; i < m.getSizeX(); i++) {
-            for (int j = 0; j < m.getSizeY(); j++) {
-                m.setCell(i, j, 1 + i * j);
-            }
-        }
-        m.print();
-        m.setCell(1, 0, 0.0);
-        m.setCell(3, 2, 0.0);
-        m.zeroify();
-        std::cout << std::endl;
-        m.print();
+        std::cout << "Partitioning around 4:\n";
+        std::vector<int> v({0, 4, 1, 5, 2, 6, 3, 7});
+        //        std::vector<int> v({4, 7});
+        //        std::vector<int> v({0, 1});
+        LinkedListNode<int> * head = create_list<int>(v);
+        head = partition_around<int>(head, 4);
+        enumerate<int>(head, listPrinter);
     }
     
+    // 2.5
+    {
+        std::cout << "Adding the lists:\n";
+        std::vector<int> v1({1, 0, 2}), v2({0, 2, 0});
+        LinkedListNode<int> * l1(create_list<int>(v1)), * l2(create_list<int>(v2));
+        auto inlineListPrinter = [] (int x) {std::cout << x;};
+        int sum = sum_lists<int>(l1, l2);
+        std::cout << "The sum of ";
+        enumerate<int>(l1, inlineListPrinter);
+        std::cout << " and ";
+        enumerate<int>(l2, inlineListPrinter);
+        std::cout << " is " << sum << std::endl;
+        sum = sum_reversed_lists(l1, l2);
+        std::cout << "Reversed sum: " << sum << std::endl;
+    }
+    {
+        try {
+            std::cout << "Adding the lists:\n";
+            std::vector<int> v1({1, 0, 2}), v2({0, 2});
+            LinkedListNode<int> * l1(create_list<int>(v1)), * l2(create_list<int>(v2));
+            auto inlineListPrinter = [] (int x) {std::cout << x;};
+            int sum = sum_lists<int>(l1, l2);
+            std::cout << "The sum of ";
+            enumerate<int>(l1, inlineListPrinter);
+            std::cout << " and ";
+            enumerate<int>(l2, inlineListPrinter);
+            std::cout << " is " << sum << std::endl;
+            sum = sum_reversed_lists(l1, l2);
+            std::cout << "Reversed sum: " << sum << std::endl;
+        } catch(const std::runtime_error& err) {
+            std::cout << "Snafu in progress: " << err.what() << std::endl;
+        }
+    }
+    // 2.6
+    {
+        std::cout << "Looking for loops:\n";
+        std::vector<char> v({'a', 'b', 'c', 'd', 'e'});
+        auto head = create_list(v);
+        auto node = head;
+        while (node->getData() != 'c') {
+            node = node->getNext();
+        }
+        auto tail = head;
+        while (tail->getNext() != nullptr) {
+            tail = tail->getNext();
+        }
+        tail->setNext(node);
+        auto looper = find_loop_start(head);
+        if (looper != nullptr) {
+            std::cout << "The loop: " << looper->getData() << std::endl;
+        } else {
+            std::cout << "Loop not found\n";
+        }
+        tail->setNext(nullptr);
+        looper = find_loop_start(head);
+        if (looper != nullptr) {
+            std::cout << "The loop: " << looper->getData() << std::endl;
+        } else {
+            std::cout << "Loop not found\n";
+        }
+    }
+    // 2.7
+    {
+        std::vector<char> v({'b', 'a', 'c', 'a', 'b'});
+        auto head = create_list(v);
+        auto inlineListPrinter = [] (char x) {std::cout << x;};
+        std::cout << "Is ";
+        enumerate<char>(head, inlineListPrinter);
+        std::cout << " a palindrome? " << is_palindrome(head) << std::endl;
+    }
+    {
+        std::vector<char> v({'b'});
+        auto head = create_list(v);
+        auto inlineListPrinter = [] (char x) {std::cout << x;};
+        std::cout << "Is ";
+        enumerate<char>(head, inlineListPrinter);
+        std::cout << " a palindrome? " << is_palindrome(head) << std::endl;
+    }
+    {
+        std::vector<char> v({'b', 'a', 'a', 'b'});
+        auto head = create_list(v);
+        auto inlineListPrinter = [] (char x) {std::cout << x;};
+        std::cout << "Is ";
+        enumerate<char>(head, inlineListPrinter);
+        std::cout << " a palindrome? " << is_palindrome(head) << std::endl;
+    }
+    {
+        std::vector<char> v({'b', 'a', 'c', 'a'});
+        auto head = create_list(v);
+        auto inlineListPrinter = [] (char x) {std::cout << x;};
+        std::cout << "Is ";
+        enumerate<char>(head, inlineListPrinter);
+        std::cout << " a palindrome? " << is_palindrome(head) << std::endl;
+    }
+    {
+        std::vector<char> v({'b', 'a', 'c', 'a', 'c'});
+        auto head = create_list(v);
+        auto inlineListPrinter = [] (char x) {std::cout << x;};
+        std::cout << "Is ";
+        enumerate<char>(head, inlineListPrinter);
+        std::cout << " a palindrome? " << is_palindrome(head) << std::endl;
+    }
+
     return 0;
 }
+
