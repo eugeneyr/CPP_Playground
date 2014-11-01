@@ -145,6 +145,18 @@ int main(int argc, const char * argv[]) {
             std::cout << "Loop not found\n";
         }
     }
+    {
+        std::vector<char> v({'a'});
+        auto head = create_list(v);
+        head->setNext(head);
+        auto looper = find_loop_start(head);
+        if (looper != nullptr) {
+            std::cout << "The loop: " << looper->getData() << std::endl;
+        } else {
+            std::cout << "Loop not found\n";
+        }
+    }
+
     // 2.7
     {
         std::vector<char> v({'b', 'a', 'c', 'a', 'b'});

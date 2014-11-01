@@ -274,7 +274,7 @@ template <typename T> bool is_circular(LinkedListNode<T> * head) {
 }
 
 template <typename T>
-LinkedListNode<T> * find_loop_start(LinkedListNode<T> * head) {
+LinkedListNode<T> * find_loop_start_modifying(LinkedListNode<T> * head) {
     auto p = head;
     // if the list is NOT circular, it is cheaper to check it in advance than 
     if (!is_circular(head)) {
@@ -292,6 +292,46 @@ LinkedListNode<T> * find_loop_start(LinkedListNode<T> * head) {
     }
     return nullptr;
 }
+
+template <typename T>
+LinkedListNode<T> * find_loop_start(LinkedListNode<T> * head) {
+    if (head == nullptr) {
+        return nullptr;
+    }
+    auto p0 = head;
+    auto p1 = head;
+    while (p0 != nullptr && p1 != nullptr) {
+        p1 = p1->getNext();
+        if (p1 == nullptr) {
+            return nullptr;
+        }
+        if (p1 == p0) {
+            break;
+        }
+        if (p1->getNext() == nullptr) {
+            return nullptr;
+        }
+        p1 = p1->getNext();
+        if (p1 == p0) {
+            break;
+        }
+        p0 = p0->getNext();
+    }
+    // if there is a loop, p0 and p1 are both pointing at a node inside it
+    auto runner = head;
+    while (runner != p0) {
+        do {
+            p1 = p1->getNext();
+            if (p1 == runner) {
+                return runner;
+            }
+        } while (p0 != p1);
+        runner = runner->getNext();
+    }
+    
+    return runner;
+}
+
 
 // 2.7. Implement a function to check if a linked list is a palindrome.
 template <typename T>
