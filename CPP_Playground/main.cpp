@@ -21,7 +21,7 @@
 //extern template LinkedListNode<int> * remove_duplicates_no_stl(LinkedListNode<int> * head);
 //extern template LinkedListNode<int> * remove_duplicates(LinkedListNode<int> * head);
 
-int main(int argc, const char * argv[]) {
+int test_chapter2(int argc, const char * argv[]) {
     auto listPrinter = [] (int x) {std::cout << x << std::endl;};
     // 2.1
     {
