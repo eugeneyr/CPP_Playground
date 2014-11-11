@@ -18,6 +18,7 @@
 		44A4406519F735E200EF6D3C /* naive_compression.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44A4406319F735E200EF6D3C /* naive_compression.cpp */; };
 		44BBD90E1A01A81B006D0CF6 /* chapter1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */; };
 		44BBD9111A01A8B4006D0CF6 /* chapter2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */; };
+		44BBD9141A0434FB006D0CF6 /* chapter3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD9121A0434FB006D0CF6 /* chapter3.cpp */; };
 		44BE3EE519FDDDF30026F488 /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BE3EE319FDDDF30026F488 /* list.cpp */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chapter1.cpp; sourceTree = "<group>"; };
 		44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chapter2.cpp; sourceTree = "<group>"; };
 		44BBD9101A01A8B4006D0CF6 /* chapter2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chapter2.h; sourceTree = "<group>"; };
+		44BBD9121A0434FB006D0CF6 /* chapter3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chapter3.cpp; sourceTree = "<group>"; };
+		44BBD9131A0434FB006D0CF6 /* chapter3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chapter3.h; sourceTree = "<group>"; };
 		44BE3EE319FDDDF30026F488 /* list.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list.cpp; sourceTree = "<group>"; };
 		44BE3EE419FDDDF30026F488 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,8 @@
 				44BBD90D1A01A81B006D0CF6 /* chapter1.cpp */,
 				44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */,
 				44BBD9101A01A8B4006D0CF6 /* chapter2.h */,
+				44BBD9121A0434FB006D0CF6 /* chapter3.cpp */,
+				44BBD9131A0434FB006D0CF6 /* chapter3.h */,
 			);
 			path = CPP_Playground;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4473E0A219F6BB73003DA3CB /* chars_all_unique.cpp in Sources */,
+				44BBD9141A0434FB006D0CF6 /* chapter3.cpp in Sources */,
 				4473E0A919F6E9B2003DA3CB /* is_rotation.cpp in Sources */,
 				4499BE8C19F95190007C04BA /* rotate_image.cpp in Sources */,
 				44BBD90E1A01A81B006D0CF6 /* chapter1.cpp in Sources */,
