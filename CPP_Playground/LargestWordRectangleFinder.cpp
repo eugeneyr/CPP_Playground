@@ -7,6 +7,8 @@
 //
 
 #include "LargestWordRectangleFinder.hpp"
+#include <utility>
+#include <algorithm>
 
 /*
  Word Rectangle:
@@ -102,12 +104,30 @@ void loadWordList(const string& fileName, set<string>& words, size_t maxWordLeng
     string line;
     while (getline(input, line)) {
         if (!line.empty() && (maxWordLength == 0 || line.length() <= maxWordLength)) {
+            transform(line.begin(), line.end(), line.begin(), ::tolower);
             words.insert(line);
         }
     }
     input.close();
 }
 
+/*
+namespace {
+    auto listPrinter = [] (int x) {std::cout << x << std::endl;};
+}
+*/
+
+void test_loadWordList() {
+    set<string> words;
+    loadWordList("data/words_small.txt", words);
+    for (auto word  : words) {
+        cout << word << endl;
+    }
+}
+
+int main(int argc, char** argv) {
+    test_loadWordList();
+}
 
 
 /*

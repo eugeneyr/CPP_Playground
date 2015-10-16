@@ -313,7 +313,7 @@ struct Animal {
     }
 
     virtual ~Animal() {
-        std::cout << "Animal " << name << " is dead\n";
+        std::cout << "Animal " << this->name << " is dead\n";
     }
 };
 
@@ -336,7 +336,7 @@ struct Cat : Animal {
     }
 
     Cat(Cat& otherCat) : Animal(otherCat.name) {
-        breed = otherCat.breed;
+        this->breed = otherCat.breed;
     }
 
     virtual ~Cat() {
@@ -368,45 +368,45 @@ struct Dog : Animal {
 };
 
 class ShelterQueue {
-    std::forward_list<std::shared_ptr<Animal>> queue;
+    std::forward_list<Animal*> queue;
 public:
-    void enqueue(std::shared_ptr<Animal>& animal);
-    std::shared_ptr<Animal> dequeueAny();
-    std::shared_ptr<Dog> dequeueDog();
-    std::shared_ptr<Cat> dequeueCat();
+    void enqueue(Animal* animal);
+    Animal* dequeueAny();
+    Dog* dequeueDog();
+    Cat* dequeueCat();
 };
 
-void ShelterQueue::enqueue(std::shared_ptr<Animal>& animal) {
+void ShelterQueue::enqueue(Animal* animal) {
     queue.insert_after(queue.end(), animal);
 }
 
-std::shared_ptr<Animal> ShelterQueue::dequeueAny() {
+Animal* ShelterQueue::dequeueAny() {
     if (queue.empty()) {
-        return std::make_shared<Animal>(nullptr);
+        return nullptr;
     }
-    std::shared_ptr<Animal>& ptr = *queue.begin();
+    Animal* ptr = *queue.begin();
     queue.pop_front();
     return ptr;
 }
 
-std::shared_ptr<Dog> ShelterQueue::dequeueDog() {
-    for (std::shared_ptr<Animal>& ptr : queue) {
-        if (typeid(ptr.get()) == typeid(Dog)) {
+Dog* ShelterQueue::dequeueDog() {
+    for (Animal* ptr : queue) {
+        if (typeid(*ptr) == typeid(Dog)) {
             queue.remove(ptr);
-            return std::shared_ptr<Dog>(dynamic_cast<Dog*>(ptr.get()));
+            return dynamic_cast<Dog*>(ptr);
         }
     }
-    return std::make_shared<Dog>(nullptr);
+    return nullptr;
 }
 
-std::shared_ptr<Cat> ShelterQueue::dequeueCat() {
-    for (std::shared_ptr<Animal>& ptr : queue) {
-        if (typeid(ptr.get()) == typeid(Cat)) {
+Cat* ShelterQueue::dequeueCat() {
+    for (Animal* ptr : queue) {
+        if (typeid(*ptr) == typeid(Cat)) {
             queue.remove(ptr);
-            return std::shared_ptr<Cat>(dynamic_cast<Cat*>(ptr.get()));
+            return dynamic_cast<Cat*>(ptr);
         }
     }
-    return std::make_shared<Cat>(nullptr);
+    return nullptr;
 }
 
 
@@ -414,14 +414,18 @@ void test_animal_shelter() {
     ShelterQueue queue;
     std::string name("Tom");
     CatBreed breed(Tabby);
-    std::shared_ptr<Animal> cat = std::make_shared<Animal>(new Cat(name, breed));
+    Animal* cat = new Cat(name, breed);
     queue.enqueue(cat);
-    
-    cat = std::make_shared<Animal>(new Cat(name, breed));
+    cat = new Cat(name, breed);
     queue.enqueue(cat);
+    name = std::string("Myrcella");
+    breed = CatBreed::Persian;
+    cat = new Cat(name, breed);
+    queue.enqueue(cat);
+
 }
 
-
+/*
 int main(int argc, char ** argv) {
     //test_three_stacks();
     //test_min_stack();
@@ -433,3 +437,4 @@ int main(int argc, char ** argv) {
     test_animal_shelter();
     return 0;
 }
+*/
