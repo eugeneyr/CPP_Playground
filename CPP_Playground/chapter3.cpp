@@ -7,6 +7,12 @@
 //
 #include <iostream>
 #include <vector>
+#include <mutex>
+#include <thread>
+#include <condition_variable>
+#include <chrono>
+#include <memory>
+#include <forward_list>
 #include "chapter3.h"
 
 void test_three_stacks() {
@@ -152,12 +158,278 @@ void test_towers_of_hanoi() {
     pop_all(towerC);
 }
 
+template <typename T> class StackedQueue {
+    std::stack<T> sideA;
+    std::stack<T> sideB;
+    std::recursive_timed_mutex mutex;
+    std::condition_variable_any cond;
+public:
+    void add(T& value);
+    T get();
+};
+
+template <typename T> void StackedQueue<T>::add(T& value) {
+    std::unique_lock<std::recursive_timed_mutex> lock(mutex);
+    sideA.push(value);
+    lock.unlock();
+    cond.notify_one();
+}
+
+template <typename T> T StackedQueue<T>::get() {
+    std::unique_lock<std::recursive_timed_mutex> lock(mutex);
+    while (sideA.empty() && sideB.empty()) {
+        cond.wait(lock);
+    }
+    if (sideB.empty()) {
+        while (!sideA.empty()) {
+            sideB.push(sideA.top());
+            sideA.pop();
+        }
+    }
+    T value = sideB.top();
+    sideB.pop();
+    return value;
+}
+
+StackedQueue<int> queue;
+
+std::recursive_timed_mutex mux;
+bool stop = false;
+
+void sends() {
+    for (int i = 0; i < 100; i++) {
+        queue.add(i);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    }
+    int i = -1;
+    queue.add(i);
+    queue.add(i);
+}
+
+void receives() {
+    while (!stop) {
+        std::unique_lock<std::recursive_timed_mutex> lock(mux);
+        int i = queue.get();
+        if (i < 0) {
+            stop = true;
+        } else {
+            std::cout << i << std::endl;
+        }
+    }
+}
+
+void test_stacked_queue() {
+    std::thread sender(sends), receiver1(receives), receiver2(receives);
+    sender.join();
+    receiver1.join();
+    receiver2.join();
+}
+
+// 3.6. Write a program to sort a stack in ascending order (with biggest items on top).
+// You may use at most one additional stack to hold items, but you may not copy the elements
+// into any other data structure (such as an array).
+// The stack supports the following operations: push, pop, peek, and isEmpty.
+void sort_stack_with_stack(std::stack<int>& data) {
+    std::stack<int> aux;
+    if (data.empty()) {
+        return;
+    }
+    int size = 0;
+    bool firstRun = true;
+    int sortedSize = 0;
+    
+    do {
+        int min = data.top();
+        while (!data.empty()) {
+            int element = data.top();
+            if (element < min) {
+                min = element;
+            }
+            data.pop();
+            if (firstRun) {
+                size++;
+            }
+            aux.push(element);
+        }
+        firstRun = false;
+        bool foundMin = false;
+        for (int i = 0; i < size - sortedSize; i++) {
+            int element = aux.top();
+            aux.pop();
+            if (element != min) {
+                data.push(element);
+            } else if (foundMin) {
+                data.push(element);
+            } else {
+                foundMin = true;
+            }
+        }
+        aux.push(min);
+        sortedSize++;
+    } while (sortedSize < size);
+    // at this point, all elements in the aux stack should be sorted
+    while (!aux.empty()) {
+        int element = aux.top();
+        aux.pop();
+        data.push(element);
+    }
+}
+
+void test_sort_stack() {
+    std::stack<int> data({3, 2, 4, 2, 7, 1, 10});
+    sort_stack_with_stack(data);
+    while (!data.empty()) {
+        std::cout << data.top() << std::endl;
+        data.pop();
+    }
+}
+
+// 3.7. An animal shelter holds only dogs and cats, and operates on a strictly "first in, first out" basis.
+// People must adopt either the "oldest" (based on arrival time) of all animals at the shelter, or they can select
+// whether they would prefer a dog or a cat (and will receive the oldest animal of that type).
+// They cannot select which specificanimal they would like. Create the data structures to maintain
+// this system and implement operations such as enqueue, dequeueAny, dequeueDog and dequeueCat.
+// You may use the built-in LinkedList data structure.
+struct Animal {
+    std::string name;
+
+    Animal() {
+    }
+    
+    Animal(const Animal& otherAnimal) {
+        name = otherAnimal.name;
+    }
+    
+    Animal(Animal& otherAnimal) {
+        name = otherAnimal.name;
+    }
+    
+    Animal(std::string& name) {
+        this->name = name;
+    }
+
+    Animal(const std::string& name) {
+        this->name = name;
+    }
+
+    virtual ~Animal() {
+        std::cout << "Animal " << name << " is dead\n";
+    }
+};
+
+typedef enum { Tabby, Siamese, Angora, Persian } CatBreed;
+
+typedef enum { Bulldog, GoldenRetriever, Rottweiller, Shepard, Chihuaua } DogBreed;
+
+struct Cat : Animal {
+    CatBreed breed;
+
+    Cat() : Animal("") {
+    }
+    
+    Cat(std::string& name, CatBreed& breed) : Animal(name) {
+        this->breed = breed;
+    }
+    
+    Cat(const Cat& otherCat) : Animal(otherCat.name) {
+        breed = otherCat.breed;
+    }
+
+    Cat(Cat& otherCat) : Animal(otherCat.name) {
+        breed = otherCat.breed;
+    }
+
+    virtual ~Cat() {
+        std::cout << "Cat " << name << " is dead\n";
+    }
+};
+
+struct Dog : Animal {
+    DogBreed breed;
+
+    Dog() : Animal("") {
+    }
+        
+    Dog(const Dog& otherDog) : Animal(otherDog.name) {
+        breed = otherDog.breed;
+    }
+    
+    Dog(Dog& otherDog) : Animal(otherDog.name) {
+        breed = otherDog.breed;
+    }
+
+    Dog(std::string& name, DogBreed& breed) : Animal(name) {
+        this->breed = breed;
+    }
+    
+    virtual ~Dog() {
+        std::cout << "Dog " << name << " is dead\n";
+    }
+};
+
+class ShelterQueue {
+    std::forward_list<std::shared_ptr<Animal>> queue;
+public:
+    void enqueue(std::shared_ptr<Animal>& animal);
+    std::shared_ptr<Animal> dequeueAny();
+    std::shared_ptr<Dog> dequeueDog();
+    std::shared_ptr<Cat> dequeueCat();
+};
+
+void ShelterQueue::enqueue(std::shared_ptr<Animal>& animal) {
+    queue.insert_after(queue.end(), animal);
+}
+
+std::shared_ptr<Animal> ShelterQueue::dequeueAny() {
+    if (queue.empty()) {
+        return std::make_shared<Animal>(nullptr);
+    }
+    std::shared_ptr<Animal>& ptr = *queue.begin();
+    queue.pop_front();
+    return ptr;
+}
+
+std::shared_ptr<Dog> ShelterQueue::dequeueDog() {
+    for (std::shared_ptr<Animal>& ptr : queue) {
+        if (typeid(ptr.get()) == typeid(Dog)) {
+            queue.remove(ptr);
+            return std::shared_ptr<Dog>(dynamic_cast<Dog*>(ptr.get()));
+        }
+    }
+    return std::make_shared<Dog>(nullptr);
+}
+
+std::shared_ptr<Cat> ShelterQueue::dequeueCat() {
+    for (std::shared_ptr<Animal>& ptr : queue) {
+        if (typeid(ptr.get()) == typeid(Cat)) {
+            queue.remove(ptr);
+            return std::shared_ptr<Cat>(dynamic_cast<Cat*>(ptr.get()));
+        }
+    }
+    return std::make_shared<Cat>(nullptr);
+}
+
+
+void test_animal_shelter() {
+    ShelterQueue queue;
+    std::string name("Tom");
+    CatBreed breed(Tabby);
+    std::shared_ptr<Animal> cat = std::make_shared<Animal>(new Cat(name, breed));
+    queue.enqueue(cat);
+    
+    cat = std::make_shared<Animal>(new Cat(name, breed));
+    queue.enqueue(cat);
+}
+
 
 int main(int argc, char ** argv) {
     //test_three_stacks();
     //test_min_stack();
     //test_set_of_stacks();
     // test_set_of_stacks_popAt();
-    test_towers_of_hanoi();
+    //test_towers_of_hanoi();
+    // test_stacked_queue();
+    //test_sort_stack();
+    test_animal_shelter();
     return 0;
 }
