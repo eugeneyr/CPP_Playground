@@ -64,6 +64,7 @@
 		44BE3EE419FDDDF30026F488 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		44F798171BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LargestWordRectangleFinder.cpp; sourceTree = "<group>"; };
 		44F798181BD05DF70094ADD4 /* LargestWordRectangleFinder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LargestWordRectangleFinder.hpp; sourceTree = "<group>"; };
+		44F7981A1BD17CD20094ADD4 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; path = data; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +123,7 @@
 				44BBD9121A0434FB006D0CF6 /* chapter3.cpp */,
 				44BBD9131A0434FB006D0CF6 /* chapter3.h */,
 				44F798171BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp */,
+				44F7981A1BD17CD20094ADD4 /* data */,
 				44F798181BD05DF70094ADD4 /* LargestWordRectangleFinder.hpp */,
 			);
 			path = CPP_Playground;
