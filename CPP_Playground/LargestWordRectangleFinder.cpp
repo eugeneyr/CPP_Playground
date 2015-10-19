@@ -2,13 +2,10 @@
 //  LargestWordRectangleFinder.cpp
 //  CPP_Playground
 //
-//  Created by Yevhen Yaremenko on 10/15/15.
-//  Copyright © 2015 Yevhen Yaremenko. All rights reserved.
-//
-
 #include "LargestWordRectangleFinder.hpp"
 #include <utility>
 #include <algorithm>
+#include <ctime>
 
 /*
  Word Rectangle:
@@ -21,44 +18,43 @@
 TrieNode::TrieNode() : stopper(false) {
 }
 
-void TrieNode::addWord(const string& word) {
-    if (word.empty()) {
+void TrieNode::addWord(const char * word) {
+    if (word == nullptr || word[0] == 0) {
         this->stopper = true;
         return;
     }
     char head = word[0];
-    string tail = word.substr(1);
+    const char * tail = word + 1;
     TrieNode* nextNode = NULL;
     if (this->letters.find(head) != this->letters.end()) {
         nextNode = this->letters[head];
     } else {
         nextNode = new TrieNode;
-        pair<char, TrieNode*> p(head, nextNode);
-        this->letters.insert(p);
+        this->letters.insert(make_pair(head, nextNode));
     }
     if (nextNode) {
         nextNode->addWord(tail);
     }
 }
 
-bool TrieNode::hasWord(const string &word) {
-    if (word.empty()) {
+bool TrieNode::hasWord(const char * word) {
+    if (word == nullptr || word[0] == 0) {
         return this->stopper;
     }
     char head = word[0];
-    string tail = word.substr(1);
+    const char * tail = word + 1;
     if (this->letters.find(head) != this->letters.end()) {
         return this->letters[head]->hasWord(tail);
     }
     return false;
 }
 
-bool TrieNode::hasPrefix(const string &prefix) {
-    if (prefix.empty()) {
+bool TrieNode::hasPrefix(const char * prefix) {
+    if (prefix == nullptr || prefix[0] == 0) {
         return true;
     }
     char head = prefix[0];
-    string tail = prefix.substr(1);
+    const char * tail = prefix + 1;
     if (this->letters.find(head) != this->letters.end()) {
         return this->letters[head]->hasPrefix(tail);
     }
@@ -88,7 +84,8 @@ TrieNode * loadTrie(const string& fileName) {
     string line;
     while (getline(input, line)) {
         if (!line.empty()) {
-            root->addWord(line);
+            transform(line.begin(), line.end(), line.begin(), ::tolower);
+            root->addWord(line.c_str());
         }
     }
     input.close();
@@ -111,11 +108,6 @@ void loadWordList(const string& fileName, set<string>& words, size_t maxWordLeng
     input.close();
 }
 
-/*
-namespace {
-    auto listPrinter = [] (int x) {std::cout << x << std::endl;};
-}
-*/
 
 void test_loadWordList() {
     set<string> words;
@@ -125,154 +117,159 @@ void test_loadWordList() {
     }
 }
 
-int main(int argc, char** argv) {
-    test_loadWordList();
+
+void test_loadTrie() {
+    set<string> words;
+    loadWordList("data/words_small.txt", words);
+    for (auto word  : words) {
+        cout << word << endl;
+    }
+    TrieNode* root = loadTrie("data/words_small.txt");
+    for (auto word  : words) {
+        cout << word << ": isPrefix? " << root->hasPrefix(word.c_str()) << " isWord? " << root->hasWord(word.c_str()) << endl;
+    }
+    for (auto word  : words) {
+        word.push_back('x');
+        cout << word << ": isPrefix? " << root->hasPrefix(word.c_str()) << " isWord? " << root->hasWord(word.c_str()) << endl;
+    }
+}
+
+void findLargestRectangle(const set<string>& wordList, vector<vector<string>>& found,
+                          int minWidth = 0, int minHeight = 0,
+                          const char fileName[] = nullptr, bool ignoreSmaller = false) {
+    size_t largestFound = 0;
+    map<size_t, TrieNode*> triesByLength;
+    map<size_t, vector<string>> wordsByLength;
+    size_t maxWordLength = 0;
+    ofstream output(fileName != nullptr ? fileName : "/dev/null");
+    long counter = 0L;
+    time_t timestamp = time(nullptr);
+    found.clear();
+    for (auto word: wordList) {
+        TrieNode * trie;
+        if (triesByLength.find(word.length()) != triesByLength.end()) {
+            trie = triesByLength[word.length()];
+        } else {
+            trie = new TrieNode;
+            triesByLength.insert(make_pair(word.length(), trie));
+        }
+        trie->addWord(word.c_str());
+        
+        wordsByLength[word.length()].push_back(word);
+        
+        if (maxWordLength < word.length()) {
+            maxWordLength = word.length();
+        }
+    }
+    
+    for (auto i = maxWordLength; i > minWidth; i--) {
+        for (auto j = i; j > minHeight; j--) {
+            time_t start = time(nullptr);
+            cout << "Searching for rectangles " << i << "x" << j << endl;
+            vector<string> words;
+            searchRectangles(found, triesByLength, wordsByLength, largestFound, counter, output, ignoreSmaller,
+                             timestamp,
+                             i, j, words);
+            time_t end = time(nullptr);
+            cout << "Time spent: " << (end - start) << endl;
+        }
+    }
+    output.close();
 }
 
 
-/*
- import copy
- import time
- 
- 
-def findLargestRectangle(wordList, minWidth=0, minHeight=0, outputFileName=None, ignoreSmaller=False):
-    largestFound = 0
-    bigTrie = TrieNode()
-    triesByLength = {}
-    wordsByLength = {}
-    maxWordLength = 0
-    found = []
-    output = None
-    counter = 0
-    timestamp = time.time()
+void searchRectangles(vector<vector<string>>& found, const map<size_t, TrieNode*>& triesByLength,
+                      const map<size_t, vector<string>>& wordsByLength,
+                      size_t& largestFound,
+                      long& counter,
+                      ofstream& output,
+                      bool ignoreSmaller,
+                      time_t timestamp,
+                      size_t length, size_t height, vector<string>& words) {
+    counter++;
 
-    def searchRectangles(length, height, words):
-        nonlocal largestFound
-        nonlocal counter
+    if (counter % 1000 == 1) {
+        time_t now = time(nullptr);
+        time_t difference = now - timestamp;
+        cout << "Time spent so far: " << difference << endl;
+        cout << "Variants checked: " << counter << " (" << (counter / (difference ? difference : 1)) << " per second)" << endl;
+    }
 
-        counter += 1
+    if (ignoreSmaller && (height * length < largestFound)) {
+        return;
+    }
 
-        if counter % 1000 == 1:
-            now = time.time()
-            difference = now - timestamp
-            print('Time spent so far: {:.3f}s'.format(difference))
-            print('Variants checked: {} ({:.3f} per second(counter)'.format(counter, (counter + 1) / difference))
-        if ignoreSmaller and (height * length < largestFound):
-            return
-        # Stops the recursion: the rectangle cannot be larger than that
-        if len(words) > height:
-            return
+    if (words.size() > height) {
+        return;
+    }
+    
+    if (height - words.size() < 3) {
+        cout << "==== Current, tries = " << counter << " ====" << endl;
+        for (auto word : words) {
+            cout << word << endl;
+        }
+    }
 
-        if height - len(words) < 3:
-            print('==== Current, tries = {} ===='.format(counter))
-            for word in words:
-                print(word)
-        # If the number of the words == height, it is a valid rectangle. Store it and exit.
-        if len(words) == height:
-            if largestFound < height * length:
-                largestFound = height * length
-            found.append(copy.deepcopy(words))
-            print('==== Found ====', file=output, flush=True)
-            for word in words:
-                print(word, file=output, flush=True)
-            if output is not None:
-                print('==== Found ====')
-                for word in words:
-                    print(word)
-            return
+    if (height == words.size()) {
+        if (largestFound < height * length) {
+            largestFound = height * length;
+        }
+        vector<string> result(words.begin(), words.end());
+        found.push_back(result);
+        cout << "==== Found ====" << endl;
+        output << "==== Found ====" << endl;
+        for (auto word : words) {
+            cout << word << endl;
+            output << word << endl;
+        }
+        return;
+    }
 
-        trie = triesByLength.get(height)
-        if trie is not None:
-            usedWords = set(words)
-            availableWords = wordsByLength.get(length)
-            if availableWords is not None:
-                for word in availableWords:
-                    if word not in usedWords:
-                        # check if cross words of words + word are prefixes of existing words
-                        words.append(word)
-                        crossWords = getCrossWords(words)
-                        allGood = True
-                        for crossWord in crossWords:
-                            if not trie.hasPrefix(crossWord):
-                                allGood = False
-                                break
-                        if allGood:
-                            # go one level deeper
-                            searchRectangles(length, height, words)
-                        words.pop()
-
-    if outputFileName is not None:
-        output = open(outputFileName, 'w')
-
-    try:
-        for word in wordList:
-            bigTrie.addWord(word)
-            trie = triesByLength.get(len(word), TrieNode())
-            trie.addWord(word)
-            triesByLength[len(word)] = trie
-            words = wordsByLength.get(len(word), set())
-            words.add(word)
-            wordsByLength[len(word)] = words
-            if len(word) > maxWordLength:
-                maxWordLength = len(word)
-        for i in range(maxWordLength, minWidth, -1):
-            for j in range(i, minHeight, -1):
-                start = time.time()
-                print('Searching for rectangles {} x {}'.format(i, j))
-                searchRectangles(i, j, [])
-                end = time.time()
-                print('Time spent: {:.3f} s'.format(end - start))
-    finally:
-        if output is not None:
-            output.close()
-
-    return found
+    auto trieIter = triesByLength.find(height);
+    
+    if (trieIter != triesByLength.end()) {
+        auto availableWordsIter = wordsByLength.find(length);
+        if (availableWordsIter != wordsByLength.end()) {
+            set<string> usedWords(words.begin(), words.end());
+            for (auto word : availableWordsIter->second) {
+                if (usedWords.find(word) == usedWords.end()) {
+                    words.push_back(word);
+                    
+                    vector<string> crossWords;
+                    getCrossWords(words, crossWords);
+                    bool allGood = true;
+                    for (auto crossWord : crossWords) {
+                        if (!trieIter->second->hasPrefix(crossWord.c_str())) {
+                            allGood = false;
+                            break;
+                        }
+                    }
+                        
+                    if (allGood) {
+                        searchRectangles(found, triesByLength,
+                                         wordsByLength,
+                                         largestFound,
+                                         counter,
+                                         output,
+                                         ignoreSmaller,
+                                         timestamp,
+                                         length, height, words);
+                    }
+                    
+                    words.pop_back();
+                }
+            }
+        }
+    }
+}
 
 
-
-import unittest
-
-
-class FindRectangleTest(unittest.TestCase):
-    @unittest.skip
-    def test_smallList(self):
-        found = findLargestRectangle(['sator', 'arepo', 'tenet', 'opera', 'rotas'])
-        for words in found:
-            print('==== Found ====')
-            for word in words:
-                print(word)
-
-    @unittest.skip
-    def test_mediumlList(self):
-        found = findLargestRectangle(loadWordList('../../data/words.txt', maxWordLength=5), minWidth=4, minHeight=4,
-                                     ignoreSmaller=True)
-        for words in found:
-            print('==== Found ====')
-            for word in words:
-                print(word)
-
-    def test_mediumlList_save7(self):
-        found = findLargestRectangle(loadWordList('../../data/words.txt', maxWordLength=7), minWidth=6, minHeight=6,
-                                     ignoreSmaller=True, outputFileName='../../data/rect_7x7.txt')
-        self.assertTrue(len(found) > 0)
-
-    @unittest.skip
-    def test_mediumlList_save(self):
-        found = findLargestRectangle(loadWordList('../../data/words.txt', maxWordLength=6), minWidth=5, minHeight=5,
-                                     ignoreSmaller=True, outputFileName='../../data/rect_6x6.txt')
-        self.assertTrue(len(found) > 0)
-
-    @unittest.skip
-    def test_biglList(self):
-        found = findLargestRectangle(loadWordList('../../data/words.txt', maxWordLength=6), minWidth=5, minHeight=5)
-        for words in found:
-            print('==== Found ====')
-            for word in words:
-                print(word)
-
-
-if __name__ == '__main__':
-    unittest.main()
- 
- 
- */
+int main(int argc, char** argv) {
+//    test_loadTrie();
+    vector<vector<string>> found;
+    set<string> wordList;
+    loadWordList("data/words.txt", wordList, 7);
+    
+    findLargestRectangle(wordList, found, 6, 6, "rect_7x7.txt", true);
+    return 0;
+}
