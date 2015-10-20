@@ -27,15 +27,24 @@ struct TrieNode {
     
     TrieNode();
     
-    void addWord(const string& word);
+    void addWord(const char * word);
     
-    bool hasWord(const string& word);
+    bool hasWord(const char * word);
 
-    bool hasPrefix(const string& prefix);
+    bool hasPrefix(const char * prefix);
 };
 
 void getCrossWords(const vector<string>& words, vector<string>& crossWords);
 
 TrieNode * loadTrie(const string& fileName);
+
+void searchRectangles(vector<vector<string>>& found, const map<size_t, TrieNode*>& triesByLength,
+                      const map<size_t, vector<string>>& wordsByLength,
+                      size_t& largestFound,
+                      long& counter,
+                      ofstream& output,
+                      bool ignoreSmaller,
+                      time_t timestamp,
+                      size_t length, size_t height, vector<string>& words);
 
 #endif /* LargestWordRectangleFinder_hpp */
