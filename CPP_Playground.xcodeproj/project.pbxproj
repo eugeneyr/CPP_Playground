@@ -20,7 +20,7 @@
 		44BBD9111A01A8B4006D0CF6 /* chapter2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD90F1A01A8B4006D0CF6 /* chapter2.cpp */; };
 		44BBD9141A0434FB006D0CF6 /* chapter3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BBD9121A0434FB006D0CF6 /* chapter3.cpp */; };
 		44BE3EE519FDDDF30026F488 /* list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44BE3EE319FDDDF30026F488 /* list.cpp */; };
-		44F798191BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44F798171BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp */; settings = {ASSET_TAGS = (); }; };
+		44F798191BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44F798171BD05DF70094ADD4 /* LargestWordRectangleFinder.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,7 +155,7 @@
 		4473E08819EDA9EE003DA3CB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Yevhen Yaremenko";
 				TargetAttributes = {
 					4473E08F19EDA9EE003DA3CB = {
@@ -240,9 +240,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -276,7 +276,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;

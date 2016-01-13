@@ -96,6 +96,7 @@ void loadWordList(const string& fileName, set<string>& words, size_t maxWordLeng
     words.clear();
     ifstream input(fileName);
     if (input.fail()) {
+        std::cerr << "Could not open file at " << fileName << "\n";
         return;
     }
     string line;
@@ -264,12 +265,17 @@ void searchRectangles(vector<vector<string>>& found, const map<size_t, TrieNode*
 }
 
 
+char* DEFAULT_WORD_FILE_LOCATION = "/Users/eyaremenko/dev/CPP_Playground/CPP_Playground/data/words.txt";
+
 int main(int argc, char** argv) {
 //    test_loadTrie();
     vector<vector<string>> found;
     set<string> wordList;
-    loadWordList("data/words.txt", wordList, 7);
-    
+    char * fileName = argc >= 2 ? argv[1] : DEFAULT_WORD_FILE_LOCATION;
+    std::cout << "Loading word list from " << fileName << "...\n";
+
+    loadWordList(fileName, wordList, 7);
+    std::cout << "Loaded words: " << wordList.size() << "\n";
     findLargestRectangle(wordList, found, 6, 6, "rect_7x7.txt", true);
     return 0;
 }
