@@ -265,17 +265,24 @@ void searchRectangles(vector<vector<string>>& found, const map<size_t, TrieNode*
 }
 
 
-char* DEFAULT_WORD_FILE_LOCATION = "/Users/eyaremenko/dev/CPP_Playground/CPP_Playground/data/words_long.txt";
+const char* DEFAULT_WORD_FILE_LOCATION = "/Users/eyaremenko/dev/CPP_Playground/CPP_Playground/data/words_long.txt";
+
+const unsigned int RECT_SIZE = 7;
+
+const unsigned int MIN_RECT_SIZE = 6;
 
 int main(int argc, char** argv) {
 //    test_loadTrie();
     vector<vector<string>> found;
     set<string> wordList;
-    char * fileName = argc >= 2 ? argv[1] : DEFAULT_WORD_FILE_LOCATION;
+    const char * fileName = argc >= 2 ? argv[1] : DEFAULT_WORD_FILE_LOCATION;
     std::cout << "Loading word list from " << fileName << "...\n";
+    char outputFileName[80];
 
-    loadWordList(fileName, wordList, 8);
+    sprintf(outputFileName, "rect_%dx%d.txt", RECT_SIZE, RECT_SIZE);
+
+    loadWordList(fileName, wordList, RECT_SIZE);
     std::cout << "Loaded words: " << wordList.size() << "\n";
-    findLargestRectangle(wordList, found, 7, 7, "rect_8x8.txt", true);
+    findLargestRectangle(wordList, found, MIN_RECT_SIZE, MIN_RECT_SIZE, outputFileName, true);
     return 0;
 }
